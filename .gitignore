@@ -1,0 +1,26 @@
+
+
+# Obsidian config
+ks-sbc-obsidian/.obsidian/
+ks-sbc-obsidian/.trash/
+ks-sbc-obsidian/do-not-publish/
+ks-sbc-obsidian/clippings/
+ks-sbc-obsidian/templates/
+ks-sbc-obisidian/files/
+
+# Hugo
+public/
+resources/
+.hugo_build.lock
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Ignore PDFs and other large binary files
+*.pdf
+*.jpg
+*.jpeg
+*.png
+*.webp
+ks-sbc-obsidian/publish.js

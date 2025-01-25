@@ -1,0 +1,36 @@
+baseURL = "https://www.kssocialistbookclub.com"
+languageCode = "en-us"
+title = "Kansas Socialist Book Club"
+contentDir = "ks-sbc-obsidian"
+
+[params]
+  description = "The official website of the Kansas Socialist Book Club."
+
+[markup.goldmark.renderer]
+  unsafe = true  # Allow HTML in markdown
+
+[permalinks]
+  books = "/books/:filename"
+  minutes = "/minutes/:year/:month/:title"
+
+[taxonomies]
+  tag = "tags"
+
+[cascade]
+  [cascade._target]
+    path = "/minutes/**"
+  [cascade._target.params]
+    type = "minutes"
+
+[module]
+  [[module.mounts]]
+    excludeFiles = [
+      "obsidian/.",
+      "trash/*",
+      "do-not-publish/*",
+      "clippings/*",
+      "templates/*",
+      "files/*"
+    ]
+    source = "ks-sbc-obsidian"
+    target = "content"

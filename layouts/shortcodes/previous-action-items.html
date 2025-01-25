@@ -1,0 +1,8 @@
+{{ $section := .Site.GetPage "section" "minutes" }}
+{{ $pages := $section.Pages.ByDate.Reverse }}
+{{ range first 1 $pages }}
+  {{ $actionItems := findRE `(?m)^# Action Items\n\n((?:- .*\n?)*)` .Content }}
+  {{ if $actionItems }}
+    {{- index $actionItems 0 | replaceRE "# Action Items\n\n" "" | replaceRE "- (.*)" "- [ ] $1" | safeHTML -}}
+  {{ end }}
+{{ end }}
