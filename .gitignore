@@ -17,6 +17,9 @@ resources/
 .DS_Store
 Thumbs.db
 
+# Environment files
+.env
+
 # Ignore PDFs and other large binary files
 *.pdf
 *.jpg
@@ -24,3 +27,4 @@ Thumbs.db
 *.png
 *.webp
 ks-sbc-obsidian/publish.js
+.env

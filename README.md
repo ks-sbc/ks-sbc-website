@@ -106,6 +106,15 @@ The site is hosted on Azure Static Web Apps with automatic deployments:
 3. Make your changes
 4. Submit a pull request to the `dev` branch
 
+## GitHub Actions Setup
+
+1. Add the following secret to your GitHub repository (Settings -> Secrets and variables -> Actions -> New repository secret):
+
+   Name: `AZURE_CREDENTIALS`
+   Value: The JSON output from running `az ad sp create-for-rbac` command (contact repository admin for credentials)
+
+This secret is used by GitHub Actions workflows to authenticate with Azure for deploying to Storage Accounts. The credentials should be kept secure and never committed to the repository.
+
 ## License
 
 [Add license information here]
