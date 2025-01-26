@@ -30,7 +30,7 @@ contentDir = "ks-sbc-obsidian"
       "do-not-publish/*",
       "clippings/*",
       "templates/*",
-      "files/*"
+      "files/**/*"
     ]
     source = "ks-sbc-obsidian"
     target = "content"
