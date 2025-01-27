@@ -1,0 +1,54 @@
+name: Deploy to Development
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Make copy-files.sh executable
+        run: chmod +x copy-files.sh
+
+      - name: Copy static files
+        run: ./copy-files.sh
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Upload to Azure Storage
+        run: |
+          az storage blob upload-batch \
+            --account-name kssbcsadev \
+            --auth-mode login \
+            --destination '$web' \
+            --source public \
+            --overwrite true
+
+      - name: Purge CDN
+        run: |
+          az cdn endpoint purge \
+            --content-paths "/*" \
+            --profile-name "ks-sbc-cdn" \
+            --name "dev-ks-sbc" \
+            --resource-group "ks-sbc"
+        continue-on-error: true
